@@ -15,6 +15,7 @@ class SchedulerProvider(val backgroundScheduler: Scheduler, val foregroundSchedu
         return { single: Single<T> ->
             single.subscribeOn(backgroundScheduler)
                     .observeOn(foregroundScheduler)
+
         }
     }
 

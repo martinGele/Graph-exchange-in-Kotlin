@@ -1,11 +1,13 @@
 package com.martin.kotlincleanarchitecture.api
 
-import com.martin.kotlincleanarchitecture.models.GraphModel
+import com.martin.kotlincleanarchitecture.models.Graph
 import io.reactivex.Single
 import retrofit2.http.GET
+import retrofit2.http.Query
 
 interface ApiCalls {
 
-    @GET("2018-02-22?access_key=eb29478c80bc50aa8184fe830d226b7f&base=EUR&symbols=USD,EUR")
-    fun getCurenncyValue():Single<GraphModel>
+    @GET("history?")
+    fun curenncyValue(@Query("start_at")start:String,
+                      @Query("end_at")end:String,@Query("base")base: String):Single<Graph>
 }
