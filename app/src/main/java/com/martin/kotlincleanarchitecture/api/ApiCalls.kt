@@ -8,6 +8,6 @@ import retrofit2.http.Query
 interface ApiCalls {
 
     @GET("history?")
-    fun curenncyValue(@Query("start_at")start:String,
-                      @Query("end_at")end:String,@Query("base")base: String):Single<Graph>
+    fun currencyValue(@Query("start_at")start:String,
+                      @Query("end_at")end:String, @Query("base")base: String):Single<Graph>
 }

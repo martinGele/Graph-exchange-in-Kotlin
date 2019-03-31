@@ -9,7 +9,9 @@ data class Graph(
     @SerializedName("end_at")
     val endAt: String = "",
     @SerializedName("rates")
-    val rates: Map<String,Objects>,
+    val rates: Map<String, ValueCurrency>,
     @SerializedName("start_at")
     val startAt: String = ""
+
+
 )

@@ -1,3 +1,8 @@
 <resources>
     <string name="app_name">KotlinCleanArchitecture</string>
+    <string name="exchange">Historical USD/EUR exchange rates</string>
+    <string name="from">from</string>
+    <string name="to">to</string>
+    <string name="search">search</string>
+    <string name="enter_search_values_bellow">enter search values bellow</string>
 </resources>
