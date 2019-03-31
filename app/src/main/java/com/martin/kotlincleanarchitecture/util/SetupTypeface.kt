@@ -7,5 +7,5 @@ import com.martin.kotlincleanarchitecture.R
 
 fun setupFont(context: Context): Typeface? {
     var typeFace: Typeface? = ResourcesCompat.getFont(context.applicationContext, R.font.roboto_regular)
-return typeFace
+    return typeFace
 }

@@ -16,6 +16,7 @@ fun initGraph(series: MutableList<HashMap<String, Any>>): Cartesian? {
 
     cartesian.padding(10.0, 10.0, 5.0, 10.0)
 
+
     cartesian.crosshair().enabled(true)
     cartesian.crosshair()
         .yLabel(true)
@@ -27,7 +28,9 @@ fun initGraph(series: MutableList<HashMap<String, Any>>): Cartesian? {
     val seriesData = arrayListOf<DataEntry>()
 
     for (point in series) {
-
+        /**
+         * get all the data from the hash map and present it on the graph
+         */
 
         seriesData.add(CustomDataEntry(point["date"].toString(), point["value"] as Number))
     }
@@ -37,7 +40,6 @@ fun initGraph(series: MutableList<HashMap<String, Any>>): Cartesian? {
 
 
     val series1 = cartesian.line(series1Mapping)
-    series1.name("EUR")
     series1.hovered().markers().enabled(true)
     series1.hovered().markers()
         .type(MarkerType.CIRCLE)
@@ -49,10 +51,6 @@ fun initGraph(series: MutableList<HashMap<String, Any>>): Cartesian? {
         .offsetY(5.0)
 
 
-
-    cartesian.legend().enabled(true)
-    cartesian.legend().fontSize(13.0)
-    cartesian.legend().padding(0.0, 0.0, 10.0, 0.0)
 
 
 

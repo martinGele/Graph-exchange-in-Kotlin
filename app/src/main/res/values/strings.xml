@@ -5,4 +5,6 @@
     <string name="to">to</string>
     <string name="search">search</string>
     <string name="enter_search_values_bellow">enter search values bellow</string>
+    <string name="no_dates_included">no dates given</string>
+    <string name="please_enter_values">Please select date from the bottoms bellow and press search!!!</string>
 </resources>

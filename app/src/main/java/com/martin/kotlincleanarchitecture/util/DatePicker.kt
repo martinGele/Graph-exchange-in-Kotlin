@@ -15,12 +15,13 @@ val day = c.get(Calendar.DAY_OF_MONTH)
 fun clickDataPickerFrom(context: Context) {
 
 
-    val datePickerDialog = DatePickerDialog(context, DatePickerDialog.OnDateSetListener { view, year, monthOfYear, dayOfMonth ->
+    val datePickerDialog =
+        DatePickerDialog(context, DatePickerDialog.OnDateSetListener { view, year, monthOfYear, dayOfMonth ->
 
-        month = monthOfYear + 1
-        fromDateString = "$year-$month-$dayOfMonth"
+            month = monthOfYear + 1
+            fromDateString = "$year-$month-$dayOfMonth"
 
-    }, year, month, day)
+        }, year, month, day)
     var datePicker = datePickerDialog.datePicker
     datePicker.maxDate = c.timeInMillis
 
@@ -30,11 +31,12 @@ fun clickDataPickerFrom(context: Context) {
 
 fun clickDataPickerTo(context: Context) {
 
-    val datePickerDialog = DatePickerDialog(context, DatePickerDialog.OnDateSetListener { view, year, monthOfYear, dayOfMonth ->
-        month = monthOfYear + 1
-        toDateString = "$year-$month-$dayOfMonth"
+    val datePickerDialog =
+        DatePickerDialog(context, DatePickerDialog.OnDateSetListener { view, year, monthOfYear, dayOfMonth ->
+            month = monthOfYear + 1
+            toDateString = "$year-$month-$dayOfMonth"
 
-    }, year, month, day)
+        }, year, month, day)
     var datePicker = datePickerDialog.datePicker
     datePicker.maxDate = c.timeInMillis
     datePickerDialog.show()
