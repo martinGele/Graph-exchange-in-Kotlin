@@ -31,6 +31,7 @@ class RepositoryTest {
         runBlocking {
             val repos = service.currencyValue("2019-3-3", "2019-4-2", "USD").await()
 
+            repos.rates.entries.size
 
             repos.rates.entries
         }
