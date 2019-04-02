@@ -1,10 +1,11 @@
 package com.martin.kotlincleanarchitecture.api
 
 import com.martin.kotlincleanarchitecture.models.Graph
-import io.reactivex.Single
+
 import kotlinx.coroutines.Deferred
 import retrofit2.http.GET
 import retrofit2.http.Query
+
 
 interface ApiCalls {
 
