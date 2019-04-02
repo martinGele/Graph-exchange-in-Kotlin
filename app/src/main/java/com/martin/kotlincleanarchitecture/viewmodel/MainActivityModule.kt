@@ -9,5 +9,5 @@ import dagger.Provides
 class MainActivityModule {
 
     @Provides
-    fun provideViewModel(repository: Repository, schedulerProvider: SchedulerProvider) = MainActivityViewModel(repository, schedulerProvider)
+    fun provideViewModel(repository: Repository) = MainActivityViewModel(repository)
 }

@@ -3,7 +3,6 @@ package com.martin.kotlincleanarchitecture
 import android.graphics.PorterDuff
 import android.os.Bundle
 import android.support.v4.content.ContextCompat
-import android.util.Log
 import android.view.View
 import android.widget.Toast
 import com.martin.kotlincleanarchitecture.util.checkForDatesOnString
@@ -13,8 +12,10 @@ import com.martin.kotlincleanarchitecture.util.initGraph
 import com.martin.kotlincleanarchitecture.viewmodel.MainActivityViewModel
 import dagger.android.DaggerActivity
 import io.reactivex.disposables.CompositeDisposable
-import io.reactivex.rxkotlin.subscribeBy
 import kotlinx.android.synthetic.main.activity_main.*
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 
@@ -47,6 +48,7 @@ class MainActivity : DaggerActivity() {
     }
 
     private fun makeApiCall() {
+        val data = mutableListOf<HashMap<String, Any>>()
 
         if (checkForDatesOnString()) {
             progressBar.visibility = View.VISIBLE
@@ -55,48 +57,35 @@ class MainActivity : DaggerActivity() {
                 ContextCompat.getColor(this, R.color.colorAccent),
                 PorterDuff.Mode.SRC_IN
             )
-            if (checkForDatesOnString())
-                compositeDisposable.add(
-                    mainActivityViewModel.showDataFromApi()
-                        .subscribeBy(onSuccess = {
 
-                            val data = mutableListOf<HashMap<String, Any>>()
-
-                            for (key in it.rates.keys) {
-                                val value = it.rates.getValue(key).eUR
-
-                                val date = it.rates[key]
-                                val hashMap: HashMap<String, Any> = HashMap<String, Any>()
-                                if (date != null) {
-                                    hashMap["date"] = key
-                                    hashMap["value"] = value
-
-                                }
-                                data.add(hashMap)
-                            }
+            GlobalScope.launch(Dispatchers.Main) {
+                val getCall = mainActivityViewModel.showDataFromApi()
 
 
-                            any_chart_view.setChart(initGraph(data))
+                for (key in getCall.rates.keys) {
+                    val value = getCall.rates.getValue(key).eUR
+
+                    val date = getCall.rates[key]
+                    val hashMap: HashMap<String, Any> = HashMap<String, Any>()
+                    if (date != null) {
+                        hashMap["date"] = key
+                        hashMap["value"] = value
+
+                    }
+                    data.add(hashMap)
+                }
+                any_chart_view.setChart(initGraph(data))
 
 
-                        }, onError = {
-                            Log.d("MainActivity", it.message)
+            }
 
 
-                        })
-                )
         } else {
             val toast = Toast.makeText(applicationContext, R.string.no_dates_included, Toast.LENGTH_LONG)
             toast.show()
         }
 
 
-    }
-
-    override fun onDestroy() {
-        super.onDestroy()
-        compositeDisposable.clear()
-        compositeDisposable.dispose()
     }
 
 

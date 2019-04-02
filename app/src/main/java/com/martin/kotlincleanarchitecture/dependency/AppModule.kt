@@ -4,6 +4,7 @@ import android.app.Application
 import com.google.gson.FieldNamingPolicy
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
+import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterFactory
 import com.jakewharton.retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import com.martin.kotlincleanarchitecture.api.ApiCalls
 import com.martin.kotlincleanarchitecture.util.BASE_URL
@@ -26,9 +27,6 @@ import javax.inject.Singleton
 class AppModule {
 
 
-    @Provides
-    @Singleton
-    fun provideSchedulerProvider() = SchedulerProvider(Schedulers.io(), AndroidSchedulers.mainThread())
 
     @Provides
     @Singleton
@@ -62,7 +60,7 @@ class AppModule {
         return Retrofit.Builder()
             .baseUrl(BASE_URL)
             .addConverterFactory(GsonConverterFactory.create(gson))
-            .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
+            .addCallAdapterFactory(CoroutineCallAdapterFactory())
             .client(okHttpClient)
             .build().create(ApiCalls::class.java)
     }
