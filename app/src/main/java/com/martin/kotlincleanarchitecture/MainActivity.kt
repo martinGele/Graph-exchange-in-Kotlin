@@ -62,21 +62,29 @@ class MainActivity : DaggerActivity() {
                 val getCall = mainActivityViewModel.showDataFromApi()
 
 
-                for (key in getCall.rates.keys) {
-                    val value = getCall.rates.getValue(key).eUR
+                //TODO this should be changed to reponse if success or not
 
-                    val date = getCall.rates[key]
-                    val hashMap: HashMap<String, Any> = HashMap<String, Any>()
-                    if (date != null) {
-                        hashMap["date"] = key
-                        hashMap["value"] = value
+                try {
 
+
+                    for (key in getCall.rates.keys) {
+                        val value = getCall.rates.getValue(key).eUR
+
+                        val date = getCall.rates[key]
+                        val hashMap: HashMap<String, Any> = HashMap<String, Any>()
+                        if (date != null) {
+                            hashMap["date"] = key
+                            hashMap["value"] = value
+
+                        }
+                        data.add(hashMap)
                     }
-                    data.add(hashMap)
+                    any_chart_view.setChart(initGraph(data))
+
+
+                } catch (e: Exception) {
+                    e.printStackTrace()
                 }
-                any_chart_view.setChart(initGraph(data))
-
-
             }
 
 
