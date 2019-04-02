@@ -1,7 +1,6 @@
 package com.martin.kotlincleanarchitecture.viewmodel
 
 import com.martin.kotlincleanarchitecture.repository.Repository
-import com.martin.kotlincleanarchitecture.util.SchedulerProvider
 import dagger.Module
 import dagger.Provides
 
